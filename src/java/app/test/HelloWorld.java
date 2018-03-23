@@ -12,9 +12,11 @@ package app.test;
 // Import required java libraries
 import java.io.*;
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 // Extend HttpServlet class
+@WebServlet(value="/hello")
 public class HelloWorld extends HttpServlet {
  
    private String message;

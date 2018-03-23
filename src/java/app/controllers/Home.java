@@ -18,4 +18,9 @@ public class Home extends  Controller {
         System.out.println("Home");
         view("welcome", req,res);
     }
+    
+    public void documentation(ServletRequest req, ServletResponse res){
+        System.out.println("documentation");
+        view("welcome", req,res);
+    }
 }

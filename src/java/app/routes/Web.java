@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package app.router;
+package app.routes;
 
 import app.controllers.Home;
 import java.util.HashMap;
@@ -18,9 +18,10 @@ public class Web implements Router{
 
     @Override
     public HashMap<String, Route> getRouteList() {
-        HashMap<String, Route> route = new HashMap<String, Route>();
+        HashMap<String, Route> route = new HashMap<>();
         
         route.put("/", new Route(new Home(), "index", "get"));
+        route.put("/ok", new Route(new Home(), "documentation", "get"));
         
         return route;
     }
