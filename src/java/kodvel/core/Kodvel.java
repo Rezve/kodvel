@@ -13,8 +13,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import kodvel.core.route.Route;
-import kodvel.interfaces.Route.Router;
+import javax.servlet.http.HttpServletRequest;
+import kodvel.core.route.RouteModel;
+import kodvel.core.route.Router;
+import kodvel.interfaces.Route.BaseRouter;
 
 /**
  *
@@ -22,12 +24,16 @@ import kodvel.interfaces.Route.Router;
  */
 public class Kodvel {
     private static Kodvel kodvel;
-    private static HashMap<String, Route> routeList;
-    private final Router router;
+    private static HashMap<String, HashMap<String, RouteModel>> routeList;
+    private final BaseRouter baseRouter;
+    private Router router;
     
     public Kodvel() {
-        router = new Web();
-        routeList = (HashMap<String, Route>) router.getRouteList();
+        router = new Router();
+        baseRouter = new Web();
+        baseRouter.registerRouter();
+        
+        routeList = (HashMap<String, HashMap<String, RouteModel>>) Router.getAllRouteList();
         
         if(kodvel == null) {
             kodvel = this;
@@ -42,15 +48,26 @@ public class Kodvel {
     }
     
     public void doRoute(String url, ServletRequest req, ServletResponse res) {
-        if( routeList.containsKey(url) ) {
-            loadClass(routeList.get(url), req, res);
+        String requestMethod = getRequestType(req);
+        
+        if(hasRoute(requestMethod, url)){
+            RouteModel routeModel = routeList.get(requestMethod).get(url) ; 
+            loadClass(routeModel, req, res);
         }else{
-            //404 page
             System.err.println("Invalid URL (No route set for : '"+ url+"')");
         }
     }
     
-    private void loadClass(Route route, ServletRequest req, ServletResponse res) {
+    private boolean hasRoute(String requestMethod, String url) {
+        return routeList.containsKey(requestMethod) && routeList.get(requestMethod).containsKey(url);
+    }
+    
+    private String getRequestType(ServletRequest request) {
+        HttpServletRequest httpRequest = (HttpServletRequest) request;        
+        return httpRequest.getMethod();
+    }
+    
+    private void loadClass(RouteModel route, ServletRequest req, ServletResponse res) {
         try {
             Method method = route.getController().getClass().getDeclaredMethod(route.getMethod(), ServletRequest.class, ServletResponse.class);
             Object[] argument = new Object[2];

@@ -6,24 +6,21 @@
 package app.routes;
 
 import app.controllers.Home;
-import java.util.HashMap;
-import kodvel.core.route.Route;
-import kodvel.interfaces.Route.Router;
-
+import kodvel.interfaces.Route.BaseRouter;
+import kodvel.core.route.Router;
 /**
  *
  * @author rezve
  */
-public class Web implements Router{
+public class Web implements BaseRouter{
 
     @Override
-    public HashMap<String, Route> getRouteList() {
-        HashMap<String, Route> route = new HashMap<>();
-        
-        route.put("/", new Route(new Home(), "index", "get"));
-        route.put("/ok", new Route(new Home(), "documentation", "get"));
-        
-        return route;
+    public void registerRouter() {
+        Router.get("/", new Home(), "index");
+        Router.post("/", new Home(), "documentation");
+        Router.put("/", new Home(), "documentation");
+        Router.patch("/", new Home(), "documentation");
+        Router.delete("/", new Home(), "documentation");
     }
     
 }

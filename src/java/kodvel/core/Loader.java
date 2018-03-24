@@ -12,6 +12,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -34,5 +35,8 @@ public class Loader extends HttpServlet{
         String path = request.getServletPath();
         System.out.println("Path: "+ path);
         Kodvel.getInstance().doRoute(path, req, res);
+        
+        HttpServletRequest httpRequest = (HttpServletRequest) request;        
+        System.out.println("normal service called: "+ httpRequest.getMethod());
     } 
-}
+    }

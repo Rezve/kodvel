@@ -5,14 +5,11 @@
  */
 package kodvel.interfaces.Route;
 
-import java.util.Map;
-import kodvel.core.route.Route;
-
 /**
  *
  * @author rezve
  */
 
-public interface Router {
-    public Map<String,Route> getRouteList();
+public interface BaseRouter {
+    public void registerRouter();
 }

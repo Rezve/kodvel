@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package kodvel.core;
+package kodvel.core.controller;
 
 import app.controllers.Home;
 import java.io.IOException;

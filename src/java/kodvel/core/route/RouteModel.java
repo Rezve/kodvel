@@ -5,21 +5,19 @@
  */
 package kodvel.core.route;
 
-import kodvel.core.Controller;
+import kodvel.core.controller.Controller;
 
 /**
  *
  * @author rezve
  */
-public class Route {
-    private String method;
-    private String httpMethod;
-    private Controller controller;
+public class RouteModel {
+    private final String method;
+    private final Controller controller;
     
-    public Route(Controller controller, String method, String httpMethod) {
+    public RouteModel(Controller controller, String method) {
         this.controller = controller;
         this.method = method;
-        this.httpMethod = httpMethod;
     }
     
     public Controller getController() {
@@ -28,9 +26,5 @@ public class Route {
     
     public String getMethod() {
         return this.method;
-    }
-    
-    public String gethttpMethod() {
-        return this.httpMethod;
     }
 }
