@@ -26,7 +26,7 @@ public class Kodvel {
     private static Kodvel kodvel;
     private static HashMap<String, HashMap<String, RouteModel>> routeList;
     private final BaseRouter baseRouter;
-    private Router router;
+    private final Router router;
     
     public Kodvel() {
         router = new Router();
@@ -75,7 +75,7 @@ public class Kodvel {
             argument[1] = res;
             method.invoke(route.getController(), argument);
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(Kodvel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Kodvel.class.getName()).log(Level.SEVERE, null, ex.getCause());
         }
     }
     
