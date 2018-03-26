@@ -9,8 +9,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import kodvel.core.controller.Controller;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,22 +18,20 @@ import javax.servlet.http.HttpServletResponse;
  * @author rezve
  */
 public class Home extends  Controller {
-    public void index(ServletRequest req, ServletResponse res){
+    public void index(HttpServletRequest req, HttpServletResponse res){
         System.out.println("Home");
         view("welcome", req,res);
     }
     
-    public void documentation(ServletRequest req, ServletResponse res){
+    public void documentation(HttpServletRequest req, HttpServletResponse res){
         //getServletContext().
         //view("welcome", req,res);
         System.out.println("documentation");
         RequestDispatcher view = req.getRequestDispatcher("index_F.html");
         
-        
-        HttpServletResponse resp = (HttpServletResponse) res;
-        
+                
         try {
-            resp.sendRedirect("");
+            res.sendRedirect("");
         } catch (IOException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }

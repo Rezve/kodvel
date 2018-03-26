@@ -7,9 +7,8 @@ package app.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import kodvel.core.controller.Controller;
 
 /**
@@ -21,17 +20,16 @@ public class Blog extends Controller{
         System.out.println("Blog constructor called");
     }
     
-    public void index(ServletRequest req, ServletResponse res) {
+    public void index(HttpServletRequest req, HttpServletResponse res) {
         view("blog/posts", req, res);
     }
     
-    public void create(ServletRequest req, ServletResponse res) {
+    public void create(HttpServletRequest req, HttpServletResponse res) {
         view("blog/create", req, res);
     }
     
-    public void store(ServletRequest req, ServletResponse res) throws IOException {
+    public void store(HttpServletRequest req, HttpServletResponse res) throws IOException {
         PrintWriter out = res.getWriter();
-        HttpServletRequest request = (HttpServletRequest) req;
         String title = req.getParameter("title");
         String body = req.getParameter("body");
         

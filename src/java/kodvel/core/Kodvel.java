@@ -14,6 +14,9 @@ import java.util.logging.Logger;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import kodvel.core.errors.ErrorBody;
+import kodvel.core.errors.Errors;
 import kodvel.core.route.RouteModel;
 import kodvel.core.route.Router;
 import kodvel.interfaces.Route.BaseRouter;
@@ -47,13 +50,14 @@ public class Kodvel {
         return kodvel;
     }
     
-    public void doRoute(String url, ServletRequest req, ServletResponse res) {
-        String requestMethod = getRequestType(req);
+    public void doRoute(String url, ServletRequest request, ServletResponse response) {
+        String requestMethod = getRequestType(request);
         
         if(hasRoute(requestMethod, url)){
             RouteModel routeModel = routeList.get(requestMethod).get(url) ; 
-            loadClass(routeModel, req, res);
+            loadClass(routeModel, (HttpServletRequest)request, (HttpServletResponse)response);
         }else{
+            Errors.message((HttpServletResponse) response, new ErrorBody("404 Not found!", "No route is set for : '"+ url + "' path", null));
             System.err.println("Invalid URL (No route set for : '"+ url+"')");
         }
     }
@@ -67,15 +71,23 @@ public class Kodvel {
         return httpRequest.getMethod();
     }
     
-    private void loadClass(RouteModel route, ServletRequest req, ServletResponse res) {
+    private void loadClass(RouteModel route, HttpServletRequest request, HttpServletResponse response) {
         try {
-            Method method = route.getController().getClass().getDeclaredMethod(route.getMethod(), ServletRequest.class, ServletResponse.class);
+            Method method = route.getController().getClass().getDeclaredMethod(route.getMethod(), HttpServletRequest.class, HttpServletResponse.class);
             Object[] argument = new Object[2];
-            argument[0] = req;
-            argument[1] = res;
+            argument[0] =  request;
+            argument[1] =  response;
             method.invoke(route.getController(), argument);
-        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(Kodvel.class.getName()).log(Level.SEVERE, null, ex.getCause());
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Kodvel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(Kodvel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(Kodvel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchMethodException ex) {
+            Errors.message(response, new ErrorBody("No Such Method '"+route.getMethod()+"'", "The method name you specified for routing is not found in "+route.getController().getClass()+"", ex));
+        } catch (SecurityException ex) {
+            Logger.getLogger(Kodvel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

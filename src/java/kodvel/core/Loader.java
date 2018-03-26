@@ -32,10 +32,9 @@ public class Loader extends HttpServlet{
         //route the request
         HttpServletRequest request = (HttpServletRequest) req;
         String path = request.getServletPath();
-        System.out.println("Path: "+ path);
+        //System.out.println("Path: "+ path);
         Kodvel.getInstance().doRoute(path, req, res);
         
         HttpServletRequest httpRequest = (HttpServletRequest) request;        
-        System.out.println("normal service called: "+ httpRequest.getMethod());
     } 
     }
