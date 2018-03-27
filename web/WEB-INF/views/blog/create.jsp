@@ -1,7 +1,7 @@
 <%-- 
     Document   : create
     Created on : Mar 25, 2018, 8:20:26 PM
-    Author     : rezve
+    Author     : Md. Rezve Hasan
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,8 +14,8 @@
     <body>
         <h1>Create Post</h1>
         <ul>
-            <li><a href="create">create</a></li>
-            <li><a href="blog">List</a></li>
+            <li><a href="${pageContext.request.contextPath}/blog/create">create</a></li>
+            <li><a href="${pageContext.request.contextPath}/blog">List</a></li>
         </ul>
         <hr>
         <form action="store" method="post">

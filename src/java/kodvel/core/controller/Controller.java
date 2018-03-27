@@ -5,7 +5,7 @@
  */
 package kodvel.core.controller;
 
-import app.controllers.Home;
+import app.controllers.WelcomeController;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,9 +27,9 @@ public class Controller {
         try {  
             dispatcher.forward(req, res);
         } catch (ServletException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WelcomeController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WelcomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

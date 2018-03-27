@@ -6,7 +6,7 @@
 package app.routes;
 
 import app.controllers.Blog;
-import app.controllers.Home;
+import app.controllers.WelcomeController;
 import kodvel.interfaces.Route.BaseRouter;
 import kodvel.core.route.Router;
 /**
@@ -24,15 +24,11 @@ public class Web implements BaseRouter{
      */
     @Override
     public void registerRouter() {
-        Router.get("/", new Home(), "index");
-        Router.post("/", new Home(), "documentation");
-        //Router.put("/", new Home(), "documentation");
-        //Router.patch("/", new Home(), "documentation");
-        //Router.delete("/", new Home(), "documentation");
+        Router.get("/", new WelcomeController(), "welcome");
         
         Router.get("/blog", new Blog(), "index");
-        Router.get("/create", new Blog(), "create");
-        Router.post("/store", new Blog(), "store");
+        Router.get("/blog/create", new Blog(), "create");
+        Router.post("/blog/store", new Blog(), "store");
     }
     
 }

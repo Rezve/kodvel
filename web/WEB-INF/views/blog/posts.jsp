@@ -1,7 +1,7 @@
 <%-- 
     Document   : posts
     Created on : Mar 25, 2018, 8:14:59 PM
-    Author     : rezve
+    Author     : Md. Rezve Hasan
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -15,7 +15,7 @@
         <h1>List of Posts</h1>
         
         <ul>
-            <li><a href="create">create</a></li>
+            <li><a href="blog/create">create</a></li>
             <li><a href="blog">List</a></li>
         </ul>
         <hr>
