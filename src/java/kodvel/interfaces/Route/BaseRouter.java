@@ -6,8 +6,10 @@
 package kodvel.interfaces.Route;
 
 /**
+ * Registering user routes
  *
- * @author rezve
+ * @author Md. Rezve Hasan
+ * @since 0.0.1
  */
 
 public interface BaseRouter {

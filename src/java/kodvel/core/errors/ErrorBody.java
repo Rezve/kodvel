@@ -6,8 +6,10 @@
 package kodvel.core.errors;
 
 /**
- *
- * @author rezve
+ * Error information container
+ * 
+ * @author Md. Rezve Hasan
+ * @since 0.0.1
  */
 public class ErrorBody {
     private String title;

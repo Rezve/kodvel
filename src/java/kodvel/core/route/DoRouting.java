@@ -17,36 +17,66 @@ import kodvel.core.errors.ErrorBody;
 import kodvel.core.errors.Errors;
 
 /**
- *
- * @author rezve
+ * Call the user defined controller and method from registered router.
+ * 
+ * @author Md. Rezve Hasan
+ * @since 0.0.1
  */
 public class DoRouting {
     private static HashMap<String, HashMap<String, RouteModel>> routeList;
     
+    /**
+     * Load users registered routes.
+     */
     public DoRouting() {
         routeList = (HashMap<String, HashMap<String, RouteModel>>) Router.getAllRouteList();
     }
     
+    /**
+     * Get route list based on request method
+     * 
+     * For post request it load controller name and method that defined for POST
+     * requests.
+     *  
+     * @param url requested URL
+     * @param request user request
+     * @param response user response
+     */
     public void start(String url, HttpServletRequest request, HttpServletResponse response) {
         String requestMethod = getRequestType(request);
-        
-        if(hasRoute(requestMethod, url)){
-            RouteModel routeModel = routeList.get(requestMethod).get(url) ; 
-            loadClass(routeModel, (HttpServletRequest)request, (HttpServletResponse)response);
-        }else{
-            Errors.message((HttpServletResponse) response, new ErrorBody("404 Not found!", "No route is set for : '"+ url + "' path", null));
-            System.err.println("Invalid URL (No route set for : '"+ url+"')");
-        }
+        RouteModel routeModel = routeList.get(requestMethod).get(url) ; 
+        loadClass(routeModel, (HttpServletRequest)request, (HttpServletResponse)response);
     }
     
-    private boolean hasRoute(String requestMethod, String url) {
+    /**
+     * If a request path and method has route defined or not.
+     * 
+     * @param requestMethod request HTTP method. POST,GET,PUT,PATCH, DELETE 
+     * @param url requested URL
+     * @return true or false
+     */
+    public static boolean hasRoute(String requestMethod, String url) {
         return routeList.containsKey(requestMethod) && routeList.get(requestMethod).containsKey(url);
     }
     
+    /**
+     * Get HTTP request method name.
+     * 
+     * @param request user request
+     * @return String POST|GET|PUT|PATCH|DELETE
+     */
     private String getRequestType(HttpServletRequest request) {
         return request.getMethod();
     }
     
+    /**
+     * Call user defined controller and method.
+     * 
+     * All the user defined controller will get two parameter with method.
+     * @param route route information
+     * @param request user request
+     * @param response user response
+     */
     private void loadClass(RouteModel route, HttpServletRequest request, HttpServletResponse response) {
         try {
             Method method = route.getController().getClass().getDeclaredMethod(route.getMethod(), HttpServletRequest.class, HttpServletResponse.class);

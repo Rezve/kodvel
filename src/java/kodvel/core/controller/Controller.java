@@ -15,8 +15,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 /**
- *
- * @author rezve
+ * Helper methods to use from the user defined controller
+ * 
+ * @author Md. Rezve Hasan
+ * @since 0.0.1
  */
 public class Controller {
     protected static void view(String file, ServletRequest req, ServletResponse res) {

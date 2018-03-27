@@ -15,32 +15,45 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author rezve
+ * Load the system and do routing
+ * 
+ * This servlet works as front controller and loaded on startup.
+ * The only instance of our system is created here.
+ * @author Md. Rezve Hasan
+ * @since 0.0.1
  */
 @WebServlet(value = "/app/*", loadOnStartup = 1)
 public class Loader extends HttpServlet{
-
+    /**
+     * Create system instance
+     * 
+     * This method is executed when the server starts.
+     * @throws ServletException 
+     */
     @Override
     public void init() throws ServletException {
-        //create system instance
         Kodvel kodvel = new Kodvel();
         System.out.println("----------System Initialized----------");
     }
     
+    /**
+     * Front controller
+     * 
+     * Get all the request passed from RequestFilter.
+     * RequestFilter added 'app/' in the requested URL.We remove it here and 
+     * pass to systems doRoute method with actual request URL.
+     * 
+     * @param req users request
+     * @param res users response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
         //route the request
         HttpServletRequest request = (HttpServletRequest) req;
-        //String path = request.getServletPath();
         String path = request.getRequestURI().substring(request.getContextPath().length());
-        //System.out.println("Path: "+ path);
-        
         //remove 'app/' from path
         Kodvel.getInstance().doRoute(path.substring(4),  (HttpServletRequest)req, (HttpServletResponse)res);
-    
-        HttpServletRequest httpRequest = (HttpServletRequest) request;        
     }
-    
-    
 }

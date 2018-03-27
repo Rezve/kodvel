@@ -12,10 +12,22 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author rezve
+ * Handle all the system error.
+ * 
+ * Depending on environment configuration it show error message to browser or
+ * console.
+ * 
+ * TODO: Save errors to log file
+ * @author Md. Rezve Hasan
+ * @since 0.0.1
  */
 public class Errors {
+    /**
+     * Write error message to browser or console.
+     * 
+     * @param response user response
+     * @param errorBody ErrorBody error message details
+     */
     public static void message(HttpServletResponse response, ErrorBody errorBody) {
         if(true) {
             sendErrorsToBrowser(response, errorBody);
@@ -24,6 +36,12 @@ public class Errors {
         }
     }
     
+    /**
+     * Styling the error message before send to browser
+     * 
+     * @param response user response
+     * @param errorBody ErrorBody error message details
+     */
     private static void sendErrorsToBrowser(HttpServletResponse response, ErrorBody errorBody) {
         try (PrintWriter out = response.getWriter()) {
             response.setContentType("text/html");
@@ -46,7 +64,11 @@ public class Errors {
             Logger.getLogger(Errors.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    /**
+     * Styling the error message before send to console
+     * 
+     * @param errorBody ErrorBody error message details
+     */
     private static void sendToConsole(ErrorBody errorBody) {
         System.err.println("------------------------------------");
         System.err.println(">> "+ errorBody.getTitle() + " <<");
@@ -56,7 +78,12 @@ public class Errors {
         System.err.println("------------------------------------");
     }
     
-    private static void saveErrorsToLog(HttpServletResponse response, ErrorBody errorBody) {
+    /**
+     * Save the error message to log file
+     * 
+     * @param errorBody ErrorBody error message details
+     */
+    private static void saveErrorsToLog(ErrorBody errorBody) {
         
     }
 }

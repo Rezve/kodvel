@@ -8,8 +8,10 @@ package app.config;
 import java.util.HashMap;
 
 /**
- *
- * @author rezve
+ * Set configurations
+ * 
+ * @author Md. Rezve Hasan
+ * @since 0.0.1
  */
 public class Config {
     private static HashMap<String, Object> config = new HashMap<>();
@@ -19,16 +21,7 @@ public class Config {
             setConfig();
     }
     private void setConfig() {
-        
-        
-        /**
-         * Supported static assets
-         * 
-         * Separated by comma. 
-         * Example: jsp,html,css,js
-         */
-        config.put("static_assets", "jsp,html,css,js");
-        
+           
         /**
          * Define project environment
          * 
@@ -36,7 +29,13 @@ public class Config {
          */
         config.put("environment", "development"); 
     }
-
+    
+    /**
+     * Get the value from configuration key
+     * 
+     * @param key String key name
+     * @return Object value set by the user
+     */
     public static Object getConfig(String key) {
         return config.get(key);
     } 

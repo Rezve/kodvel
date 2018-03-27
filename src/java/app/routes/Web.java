@@ -10,11 +10,18 @@ import app.controllers.Home;
 import kodvel.interfaces.Route.BaseRouter;
 import kodvel.core.route.Router;
 /**
- *
- * @author rezve
+ * Register routes
+ * 
+ * @author Md. Rezve Hasan
+ * @since 0.0.1
  */
 public class Web implements BaseRouter{
-
+    /**
+     * Register your routes here.
+     * 
+     * Your controller and method will be invoked when user request for the specified URL.
+     * Currently supported HTTP methods are GET,POST,PUT,PATCH,DELETE
+     */
     @Override
     public void registerRouter() {
         Router.get("/", new Home(), "index");

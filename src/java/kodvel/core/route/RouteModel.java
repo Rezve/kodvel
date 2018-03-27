@@ -8,8 +8,12 @@ package kodvel.core.route;
 import kodvel.core.controller.Controller;
 
 /**
- *
- * @author rezve
+ *  Store route information
+ * 
+ * Save method mane and COntroller object.
+ * It used for calling the method from controller object.
+ * @author Md. Rezve Hasan
+ * @since 0.0.1
  */
 public class RouteModel {
     private final String method;
