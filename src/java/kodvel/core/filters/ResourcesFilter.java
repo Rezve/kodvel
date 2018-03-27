@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package kodvel.core;
+package kodvel.core.filters;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -12,32 +12,33 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  *
  * @author rezve
  */
-public class LoadFilter implements Filter{
+@WebFilter("/*")
+public class ResourcesFilter implements Filter{
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("Filter constructor");
-        Kodvel kodvel = new Kodvel();
+        
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        System.out.println("Filter is called");
         HttpServletRequest req = (HttpServletRequest) request;
-        String path = req.getServletPath();
-        System.out.println("Path: "+ path);
-        Kodvel.getInstance().doRoute(path, req, (HttpServletResponse)response);
-        
-        HttpServletRequest httpRequest = (HttpServletRequest) request;        
-        System.out.println("normal service called: "+ httpRequest.getMethod());
-        //chain.doFilter(request, response);//sends request to next resource  
+        String path = req.getRequestURI().substring(req.getContextPath().length());
+       // String path = req.getServletPath();
+        System.out.println("DO FIlter path: "+ path);
+        if (path.startsWith("/resources/")) {
+            chain.doFilter(request, response); // Goes to default servlet.
+        } else {
+            request.getRequestDispatcher("/app/" + path).forward(request, response); // Goes to your controller.
+        }
+
     }
 
     @Override

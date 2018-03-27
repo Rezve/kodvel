@@ -7,6 +7,9 @@ package app.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import kodvel.core.controller.Controller;
@@ -21,7 +24,16 @@ public class Blog extends Controller{
     }
     
     public void index(HttpServletRequest req, HttpServletResponse res) {
-        view("blog/posts", req, res);
+        System.out.println("Blog.index");
+         //view("blog/posts", req, res);
+        try {
+            req.getRequestDispatcher("/resources/index.html").forward(req, res);
+            //  view("blog/posts", req, res);
+        } catch (ServletException ex) {
+            Logger.getLogger(Blog.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Blog.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void create(HttpServletRequest req, HttpServletResponse res) {

@@ -10,8 +10,6 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import kodvel.core.Kodvel;
@@ -29,7 +27,7 @@ public class DoRouting {
         routeList = (HashMap<String, HashMap<String, RouteModel>>) Router.getAllRouteList();
     }
     
-    public void start(String url, ServletRequest request, ServletResponse response) {
+    public void start(String url, HttpServletRequest request, HttpServletResponse response) {
         String requestMethod = getRequestType(request);
         
         if(hasRoute(requestMethod, url)){
@@ -45,9 +43,8 @@ public class DoRouting {
         return routeList.containsKey(requestMethod) && routeList.get(requestMethod).containsKey(url);
     }
     
-    private String getRequestType(ServletRequest request) {
-        HttpServletRequest httpRequest = (HttpServletRequest) request;        
-        return httpRequest.getMethod();
+    private String getRequestType(HttpServletRequest request) {
+        return request.getMethod();
     }
     
     private void loadClass(RouteModel route, HttpServletRequest request, HttpServletResponse response) {

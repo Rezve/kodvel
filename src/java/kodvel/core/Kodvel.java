@@ -8,8 +8,8 @@ package kodvel.core;
 import app.config.Config;
 import app.routes.Web;
 import java.util.HashMap;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import kodvel.core.route.DoRouting;
 import kodvel.core.route.RouteModel;
 import kodvel.core.route.Router;
@@ -50,7 +50,7 @@ public class Kodvel {
         return kodvel;
     }
     
-    public void doRoute(String url, ServletRequest request, ServletResponse response) {
+    public void doRoute(String url, HttpServletRequest request, HttpServletResponse response) {
         doRouting.start(url, request, response);
     }  
 }
