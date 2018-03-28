@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Handle all the system error.
  * 
- * Depending on environment configuration it show error message to browser or
+ * Depending on environment configuration it shows the error message to browser or
  * console.
  * 
  * TODO: Save errors to log file

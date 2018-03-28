@@ -17,7 +17,7 @@ import kodvel.core.errors.ErrorBody;
 import kodvel.core.errors.Errors;
 
 /**
- * Call the user defined controller and method from registered router.
+ * Call the user-defined controller and method from the registered router.
  * 
  * @author Md. Rezve Hasan
  * @since 0.0.1
@@ -35,7 +35,7 @@ public class DoRouting {
     /**
      * Get route list based on request method
      * 
-     * For post request it load controller name and method that defined for POST
+     * For post request, it loads controller name and method that defined for POST
      * requests.
      *  
      * @param url requested URL
@@ -49,7 +49,7 @@ public class DoRouting {
     }
     
     /**
-     * If a request path and method has route defined or not.
+     * If a request path and method has a route defined or not.
      * 
      * @param requestMethod request HTTP method. POST,GET,PUT,PATCH, DELETE 
      * @param url requested URL
@@ -72,7 +72,7 @@ public class DoRouting {
     /**
      * Call user defined controller and method.
      * 
-     * All the user defined controller will get two parameter with method.
+     * All the user-defined controller will get two parameters with the method.
      * @param route route information
      * @param request user request
      * @param response user response

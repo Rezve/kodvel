@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Load the system and do routing
  * 
- * This servlet works as front controller and loaded on startup.
+ * This servlet works as a front controller and loaded on startup.
  * The only instance of our system is created here.
  * @author Md. Rezve Hasan
  * @since 0.0.1
@@ -40,7 +40,7 @@ public class Loader extends HttpServlet{
      * Front controller
      * 
      * Get all the request passed from RequestFilter.
-     * RequestFilter added 'app/' in the requested URL.We remove it here and 
+     * RequestFilter added 'app/' to the requested URL.We remove it here and 
      * pass to systems doRoute method with actual request URL.
      * 
      * @param req users request

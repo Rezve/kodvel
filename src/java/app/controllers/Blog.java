@@ -5,8 +5,10 @@
  */
 package app.controllers;
 
+import app.models.PostModel;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import kodvel.core.controller.Controller;
@@ -18,8 +20,11 @@ import kodvel.core.controller.Controller;
  * @since 0.0.1
  */
 public class Blog extends Controller{
+    private final ArrayList<PostModel> posts;
     
-    public Blog() {}
+    public Blog() {
+        posts = new ArrayList<>();
+    }
     
     /**
      * Show all the posts

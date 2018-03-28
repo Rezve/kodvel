@@ -37,7 +37,7 @@ public class RequestFilter implements Filter{
      * Separate request
      * 
      * If requested path is defined in router then pass the request to Loader
-     * Otherwise servlet container handle the request
+     * Otherwise servlet container handles the request
      * 
      * @param request user request object
      * @param response user response
