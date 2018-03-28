@@ -89,7 +89,8 @@ public class DoRouting {
         } catch (IllegalArgumentException ex) {
             Logger.getLogger(Kodvel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvocationTargetException ex) {
-            Logger.getLogger(Kodvel.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Kodvel.class.getName()).log(Level.SEVERE, null, ex);
+            Errors.message(response, new ErrorBody("Error in your controller", "In this class '"+route.getController().toString()+":"+route.getMethod()+"' "+ex.getCause(), ex));
         } catch (NoSuchMethodException ex) {
             Errors.message(response, new ErrorBody("No Such Method '"+route.getMethod()+"'", "The method name you specified for routing is not found in "+route.getController().getClass()+"", ex));
         } catch (SecurityException ex) {

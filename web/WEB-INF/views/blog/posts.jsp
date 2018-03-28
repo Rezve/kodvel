@@ -4,7 +4,10 @@
     Author     : Md. Rezve Hasan
 --%>
 
+<%@page import="app.models.PostModel"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,5 +22,13 @@
             <li><a href="blog">List</a></li>
         </ul>
         <hr>
+        <% 
+            ArrayList<PostModel> posts = (ArrayList)request.getAttribute("posts");
+        %>
+        
+        <c:forEach  items="${posts}" var="post">
+            Title: ${post.title} <br>
+            Body: ${post.body} <br><br>
+        </c:forEach>
     </body>
 </html>

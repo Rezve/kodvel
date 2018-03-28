@@ -20,10 +20,13 @@ import kodvel.core.controller.Controller;
  * @since 0.0.1
  */
 public class Blog extends Controller{
-    private final ArrayList<PostModel> posts;
+    private static ArrayList<PostModel> posts;
     
     public Blog() {
-        posts = new ArrayList<>();
+        if(posts == null) {
+           posts = new ArrayList<>();
+            System.out.println("post list initialized");
+        }
     }
     
     /**
@@ -33,6 +36,7 @@ public class Blog extends Controller{
      * @param res user response
      */
     public void index(HttpServletRequest req, HttpServletResponse res) {
+        req.setAttribute("posts", posts);
         view("blog/posts", req, res);
     }
     
@@ -58,10 +62,18 @@ public class Blog extends Controller{
         String title = req.getParameter("title");
         String body = req.getParameter("body");
         
+        if(!title.isEmpty() && !body.isEmpty()) {
+            PostModel post = new PostModel();
+            post.setTitle(title);
+            post.setBody(body);
+            posts.add(post);
+        }
+        
         res.setContentType("text/html");
         out.println("You enterend: ");
         out.println("Title: "+ title + "<br>");
         out.println("Body: "+ body + "<br>");
-        out.println("<a href=\"blog\" >Back</a>");
+        out.println("<h1> Post Saved successfully </h1><br>");
+        out.println("<a href=\"../blog\" >Back</a>");
     }
 }
