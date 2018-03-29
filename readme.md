@@ -1,12 +1,12 @@
 # Kodvel
 
-Simple servlet MVC framework
+The aim of this project is provide a simple MVC structure to organize your servlet applications.
 
-The aim of this project is provide a simple MVC structure to organize your servlet applications and a cleaner way to define routes.It also allows you to define multiple methods in a single controller to handles multiple requests.
-
+### Features:
+1. Controllers support multiple method to handle multiple request.Like `Post` class can have `index` method for showing all post, `view` for viewing a single post, `edit` for edit post form, `store` for save post by POST request.
+2. Easy route for binding url patterns to Controller and method.
 
 ## Getting Started
-
 
 ### Prerequisites
 
@@ -15,24 +15,13 @@ The aim of this project is provide a simple MVC structure to organize your servl
 
 ### Installing
 
-1. Open terminal and type.
+1. Clone the project into your machine or download as zip.
     ```
     git clone https://github.com/rezve/kodvel.git KodvelBlog
     cd KodvelBlog
     ```
  2. Open the project with NetBeans IDE
  3. Run the project. A welcome page will open in your default browser.
-
-### Overview
-
-**Model–view–controller (MVC)** is an architectural pattern commonly used for developing user interfaces that divides an application into three interconnected parts.This is done to separate internal representations of information from the ways information is presented to and accepted from the user. The MVC design pattern decouples these major components allowing for efficient code reuse and parallel development.
-
-#### Components
-* The **model** is the central component of the pattern. It expresses the application's behavior in terms of the problem domain, independent of the user interface.[6] It directly manages the data, logic and rules of the application.
-* A **view** can be any output representation of information, such as a chart or a diagram. Multiple views of the same information are possible, such as a bar chart for management and a tabular view for accountants.
-* The third part or section, the **controller**, accepts input and converts it to commands for the model or view.
-
-[--From Wikipedia](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 
 ### Project Structure
 
@@ -53,10 +42,63 @@ The aim of this project is provide a simple MVC structure to organize your servl
   └── ...
 ```
 
+## How to start ?
+Step 1:
+Lets start by creating a simple JSP view in `view/blog` folder
+```html
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Blog</title>
+    </head>
+    <body>
+        <h1>List of Posts</h1>
+     </body>
+</html>
+```
+
+Setp 2: 
+	Now, Create a controller class inside `app/controllers` folder. This will serve our view.
+ 
+ ```java
+ public class Blog extends Controller{
+      public void index(HttpServletRequest req, HttpServletResponse res) {
+          req.setAttribute("posts", posts);
+          view("blog/posts", req, res);
+      }
+      ...
+ }
+ ```
+**NOTE:** All methods (those are used for handling user request) inside a controller must have this two argument. 
+
+We have completed our first controller. Now register it to receive user request.
+
+Step 3: Define a route in `app/routes/web.java`
+
+```java
+public void registerRouter() {   
+	...
+	Router.get("/blog", new Blog(), "index");
+}
+```
+here we registered our `index` method for handaling all the request for `/blog`
+
+Done! Lets visit [http://localhost:8080/kodvel/blog](http://localhost:8080/kodvel/blog)
+
+You will see your views in browser.
+
+	List of Posts
+
+So here is the flow is: 
+1. Create your views (JSP) with html/css design and data passed from controller.
+2. Create a model for holding data.
+3. Create a controller to fetch data from db and process other logic and pass the data to view.
 
 ### Documentation
-
+* [Application life cycle]()
 * [Controller]()
 * [Routing]()
 * [View]()
@@ -72,16 +114,10 @@ The aim of this project is provide a simple MVC structure to organize your servl
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## TODO LSIT
-
-* [Done] Serving static assets
-* Use config file for environment
 * Form validation
-* [Done] Useful error message 
-* [Done] Commenting in the code
 * Database support
 * Simple database helper method
-* Complete Documentation
-
+* Complete this Documentation
 
 ## Versioning
 
@@ -99,5 +135,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Name of this project inspired by [laravel](https://github.com/laravel/laravel)
+* Name and routing style of this project inspired by [laravel](https://github.com/laravel/laravel)
 
