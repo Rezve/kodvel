@@ -37,22 +37,22 @@ The aim of this project is provide a simple MVC structure to organize your servl
 ### Project Structure
 
 ```
-	├── Web Pages          		
-    │   ├── WEB-INF          	
-    │   │	├── views          	# define your views in this folder (JSP files)
-    │   │	└── web.xml        	
-    │   └── resources        	# static resources (css,js,image, etc)
-	│
-	├── Source Packages    		
-    │   └── app	          		
-    │   	├── config      	# project configuration
-    │   	├── controllers 	# all the controller classes
-	│		├── models      	# all models (Beans)
-    │   	└── routes      	# register your routes here
-    │   
-    └── ...
-
+  ├── Web Pages               
+  │   ├── WEB-INF             
+  │   │   ├── views           # define your views in this folder (JSP files)
+  │   │   └── web.xml         
+  │   └── resources           # static resources (css,js,image, etc)
+  │
+  ├── Source Packages         
+  │   ├── app                 
+  │   │   ├── config          # project configuration
+  │   │   ├── controllers     # all the controller classes
+  │   │   ├── models          # all models (Beans)
+  │   │   └── routes          # register your routes here
+  │   └── Kodvel				# system files
+  └── ...
 ```
+
 
 
 ### Documentation
