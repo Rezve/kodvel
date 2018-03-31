@@ -1,10 +1,10 @@
 # Kodvel
 
-The aim of this project is provide a simple MVC structure to organize your servlet applications.
+The aim of this project is to provide a simple MVC structure to organize your Servlet applications.
 
 ### Features:
-1. Controllers support multiple method to handle multiple request.Like `Post` class can have `index` method for showing all post, `view` for viewing a single post, `edit` for edit post form, `store` for save post by POST request.
-2. Easy route for binding url patterns to Controller and method.
+1. Controllers support multiple methods to handle multiple requests.Like `Post` class can have `index` method for showing all post, `view` for viewing a single post, `edit` for edit post form, `store` for saving post by POST request.
+2. Easy route for binding URL patterns to Controller and method.
 
 ## Getting Started
 
@@ -15,10 +15,10 @@ The aim of this project is provide a simple MVC structure to organize your servl
 
 ### Installing
 
-1. Clone the project into your machine or download as zip.
+1. Clone the project into your machine or download as a zip.
     ```
-    git clone https://github.com/rezve/kodvel.git KodvelBlog
-    cd KodvelBlog
+    git clone https://github.com/rezve/kodvel.git
+    cd kodvel
     ```
  2. Open the project with NetBeans IDE
  3. Run the project. A welcome page will open in your default browser.
@@ -38,13 +38,13 @@ The aim of this project is provide a simple MVC structure to organize your servl
   │   │   ├── controllers     # all the controller classes
   │   │   ├── models          # all models (Beans)
   │   │   └── routes          # register your routes here
-  │   └── Kodvel				# system files
+  │   └── Kodvel              # system files
   └── ...
 ```
 
-## How to start ?
-Step 1:
-Lets start by creating a simple JSP view in `view/blog` folder
+## Quick start
+**Step 1:**
+Let's start by creating a simple JSP view in `view/blog` folder
 ```html
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
@@ -60,8 +60,8 @@ Lets start by creating a simple JSP view in `view/blog` folder
 </html>
 ```
 
-Setp 2: 
-	Now, Create a controller class inside `app/controllers` folder. This will serve our view.
+**Setp 2:** 
+	Now, Create a controller class inside `app/controllers` folder. This will serve our views.
  
  ```java
  public class Blog extends Controller{
@@ -76,7 +76,7 @@ Setp 2:
 
 We have completed our first controller. Now register it to receive user request.
 
-Step 3: Define a route in `app/routes/web.java`
+**Step 3:** Define a route in `app/routes/web.java`
 
 ```java
 public void registerRouter() {   
@@ -84,18 +84,18 @@ public void registerRouter() {
 	Router.get("/blog", new Blog(), "index");
 }
 ```
-here we registered our `index` method for handaling all the request for `/blog`
+here we registered our `index` method for handling all the request for `/blog`
 
 Done! Lets visit [http://localhost:8080/kodvel/blog](http://localhost:8080/kodvel/blog)
 
-You will see your views in browser.
+You will see your views in the browser.
 
 	List of Posts
 
-So here is the flow is: 
-1. Create your views (JSP) with html/css design and data passed from controller.
+So here is the flow: 
+1. Create your views (JSP) with html/css design and data passed from the controller.
 2. Create a model for holding data.
-3. Create a controller to fetch data from db and process other logic and pass the data to view.
+3. Create a controller to fetch data from DB and process other logic and pass the data to view.
 
 ### Documentation
 * [Application life cycle]()
@@ -111,13 +111,14 @@ So here is the flow is:
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## TODO LSIT
+* Utility function for base URL
 * Form validation
 * Database support
 * Simple database helper method
-* Complete this Documentation
+* Completing this Documentation.
 
 ## Versioning
 

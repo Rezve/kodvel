@@ -7,10 +7,10 @@ package app.controllers;
 
 import app.models.PostModel;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import kodvel.core.controller.Controller;
 
 /**
@@ -37,6 +37,7 @@ public class Blog extends Controller{
      */
     public void index(HttpServletRequest req, HttpServletResponse res) {
         req.setAttribute("posts", posts);
+        //req.setAttribute("message", "Post saved successfully!");
         view("blog/posts", req, res);
     }
     
@@ -58,7 +59,6 @@ public class Blog extends Controller{
      * @throws IOException 
      */
     public void store(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        PrintWriter out = res.getWriter();
         String title = req.getParameter("title");
         String body = req.getParameter("body");
         
@@ -67,13 +67,14 @@ public class Blog extends Controller{
             post.setTitle(title);
             post.setBody(body);
             posts.add(post);
+            
+            
+            HttpSession session = req.getSession(false);
+            session.setAttribute("message", "Post saved successfully!");
         }
+        //req.setAttribute("posts", posts);
         
-        res.setContentType("text/html");
-        out.println("You enterend: ");
-        out.println("Title: "+ title + "<br>");
-        out.println("Body: "+ body + "<br>");
-        out.println("<h1> Post Saved successfully </h1><br>");
-        out.println("<a href=\"../blog\" >Back</a>");
+        //redirect("/kodvel/blog", req, res);
+        res.sendRedirect("/kodvel/blog");
     }
 }

@@ -13,6 +13,8 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Helper methods to use from the user defined controller
@@ -21,7 +23,7 @@ import javax.servlet.ServletResponse;
  * @since 0.0.1
  */
 public class Controller {
-    protected static void view(String file, ServletRequest req, ServletResponse res) {
+    protected static void view(String file, HttpServletRequest req, HttpServletResponse res) {
         RequestDispatcher dispatcher=req.getRequestDispatcher("/WEB-INF/views/"+file+".jsp");
         
         try {  
@@ -30,6 +32,14 @@ public class Controller {
             Logger.getLogger(WelcomeController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(WelcomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    protected static void redirect(String file, HttpServletRequest req, HttpServletResponse res) {
+        try {
+            res.sendRedirect(file);
+        } catch (IOException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
