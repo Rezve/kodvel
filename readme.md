@@ -69,6 +69,10 @@ Let's start by creating a simple JSP view in `view/blog` folder
           req.setAttribute("posts", posts);
           view("blog/posts", req, res);
       }
+      
+    public void create(HttpServletRequest req, HttpServletResponse res) {
+        view("blog/create", req, res);
+    }
       ...
  }
  ```
@@ -82,9 +86,10 @@ We have completed our first controller. Now register it to receive user request.
 public void registerRouter() {   
 	...
 	Router.get("/blog", new Blog(), "index");
+        Router.get("/blog/create", new Blog(), "create");
 }
 ```
-here we registered our `index` method for handling all the request for `/blog`
+here we registered our `index` method for handling all the request for `/blog` and `create` method for `/blog/create` url.
 
 Done! Lets visit [http://localhost:8080/kodvel/blog](http://localhost:8080/kodvel/blog)
 
