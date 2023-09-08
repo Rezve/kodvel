@@ -10,7 +10,7 @@ import kodvel.core.controller.Controller;
 /**
  *  Store route information
  * 
- * Save method mane and Controller object.
+ * Save method name and Controller object.
  * It used for calling the method from controller object.
  * @author Md. Rezve Hasan
  * @since 0.0.1
