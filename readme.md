@@ -143,3 +143,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * Name and routing style of this project inspired by [laravel](https://github.com/laravel/laravel)
 
+![Visitors](https://api.visitorbadge.io/api/combined?path=https%3A%2F%2Fgithub.com%2FRezve%2Fkodvel&countColor=%23263759&style=flat-square)
+
